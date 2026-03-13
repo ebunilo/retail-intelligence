@@ -152,7 +152,7 @@ class HybridRetriever:
         bm25_scores = self._bm25.get_scores(tokenized_query)
         order_bm25 = np.argsort(bm25_scores)[::-1][:vector_k]
         indices_bm25 = order_bm25.tolist()
-        scores_bm25_list = bm25_scores.tolist()
+        _ = bm25_scores.tolist()  # scores_bm25_list
 
         # Reciprocal rank fusion: score = 1/(rank_vec) + 1/(rank_bm25)
         rank_vec = {idx: r for r, idx in enumerate(indices_vec, 1)}

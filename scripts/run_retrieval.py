@@ -7,14 +7,14 @@ import os
 import sys
 from pathlib import Path
 
+from app.rag.hybrid_search import HybridRetriever
+
 # Quiet HuggingFace / sentence-transformers logs when running as CLI
 os.environ.setdefault("TRANSFORMERS_VERBOSITY", "error")
 os.environ.setdefault("HF_HUB_DISABLE_PROGRESS_BARS", "1")
 
 project_root = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(project_root))
-
-from app.rag.hybrid_search import HybridRetriever
 
 
 def main():
