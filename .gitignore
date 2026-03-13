@@ -1,3 +1,4 @@
 .env
 .venv/
 agent.md
+__pycache__/
