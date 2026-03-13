@@ -82,12 +82,10 @@ def resolve_countries(query: str, provided_country: Optional[str] = None) -> Lis
     - Else: extract from query via extract_countries_from_query.
     Returns list of canonical country names (empty = no country filter).
     """
-    from_query = extract_countries_from_query(query)
+    countries = []
     if provided_country and str(provided_country).strip():
         raw = str(provided_country).strip()
         parts = re.split(r"\s+and\s+|\s*,\s*", raw, flags=re.I)
-        from_ui = [_normalize_country(p) for p in parts if p.strip()]
-        # Merge so comparison queries (e.g. "compare with Nigeria" + UI "Ghana") get both
-        merged = list(dict.fromkeys(from_ui + from_query))
-        return merged
-    return from_query
+        countries.extend([_normalize_country(p) for p in parts if p.strip()])
+    countries.extend(extract_countries_from_query(query))
+    return countries
